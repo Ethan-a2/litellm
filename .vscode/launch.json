@@ -1,0 +1,21 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug litellm CLI", // 调试配置的名称，可以自定义
+            "type": "python",
+            "request": "launch",
+            "module": "litellm.proxy.proxy_cli", // 这等同于 python -m litellm.proxy.proxy_cli
+            "args": [
+                // 在这里添加你的命令行参数
+                // 例如: "--model", "ollama/llama2", "--port", "8000"
+                "--config", "/home/liuqi/oneKey/cfg/litellm/config.yaml", "--detailed_debug"
+            ],
+            "console": "integratedTerminal", // 在集成的终端中显示输出
+            "justMyCode": true // 调试时只进入你自己的代码，不进入库代码
+        }
+    ]
+}
