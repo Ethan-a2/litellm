@@ -493,6 +493,13 @@ class VertexGeminiConfig(VertexAIBaseConfig, BaseConfig):
             elif "type" in tool:
                 tool = {k: tool[k] for k in tool if k != "type"}
             tool_name = list(tool.keys())[0] if len(tool.keys()) == 1 else None
+
+            effective_tool_name = None
+            # 检查顶层键是否是 'function'
+            if tool_name == "function":
+                function_details = tool.get("function", {})
+                effective_tool_name = function_details.get("name")
+
             if tool_name and (
                 tool_name == "codeExecution"
                 or tool_name == VertexToolName.CODE_EXECUTION.value
