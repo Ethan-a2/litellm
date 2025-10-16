@@ -1668,7 +1668,8 @@ class VertexGeminiConfig(VertexAIBaseConfig, BaseConfig):
             "Content-Type": "application/json",
         }
         if api_key is not None:
-            default_headers["Authorization"] = f"Bearer {api_key}"
+            # default_headers["Authorization"] = f"Bearer {api_key}"
+            default_headers["x-goog-api-key"] = f"{api_key}"
         if headers is not None:
             default_headers.update(headers)
 
