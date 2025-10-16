@@ -405,10 +405,19 @@ class VertexGeminiConfig(VertexAIBaseConfig, BaseConfig):
                 del tool["type"]  # type: ignore
 
             tool_name = list(tool.keys())[0] if len(tool.keys()) == 1 else None
+
+            effective_tool_name = None
+            # 检查顶层键是否是 'function'
+            if tool_name == "function":
+                function_details = tool.get("function", {})
+                effective_tool_name = function_details.get("name")
+
             if tool_name and (
                 tool_name == "codeExecution" or tool_name == VertexToolName.CODE_EXECUTION.value
             ):  # code_execution maintained for backwards compatibility
                 code_execution = self.get_tool_value(tool, "codeExecution")
+            elif tool_name and effective_tool_name == VertexToolName.GOOGLE_SEARCH.value:
+                googleSearch = self.get_tool_value(tool, VertexToolName.GOOGLE_SEARCH.value)
             elif tool_name and tool_name == VertexToolName.GOOGLE_SEARCH.value:
                 googleSearch = self.get_tool_value(tool, VertexToolName.GOOGLE_SEARCH.value)
             elif tool_name and tool_name == VertexToolName.GOOGLE_SEARCH_RETRIEVAL.value:
