@@ -948,7 +948,7 @@ class Logging(LiteLLMLoggingBaseClass):
                         f"\033[92m{curl_command}\033[0m\n"
                     )  # .warning ensures this shows up in all environments
                 else:
-                    verbose_logger.debug(f"\033[92m{curl_command}\033[0m\n")
+                    verbose_logger.info(f"\033[92m{curl_command}\033[0m\n")
 
     def _get_request_body(self, data: dict) -> str:
         return str(data)

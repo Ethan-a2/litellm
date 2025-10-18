@@ -363,11 +363,11 @@ def print_verbose(
 ):
     try:
         if log_level == "DEBUG":
-            verbose_logger.debug(print_statement)
+            verbose_logger.debug(print_statement, stacklevel=2)
         elif log_level == "INFO":
-            verbose_logger.info(print_statement)
+            verbose_logger.info(print_statement, stacklevel=2)
         elif log_level == "ERROR":
-            verbose_logger.error(print_statement)
+            verbose_logger.error(print_statement, stacklevel=2)
         if litellm.set_verbose is True and logger_only is False:
             print(print_statement)  # noqa
     except Exception:
@@ -6550,22 +6550,22 @@ def print_args_passed_to_litellm(original_function, args, kwargs):
             "\n",
         )  # new line before
         print_verbose(
-            "\033[92mRequest to litellm:\033[0m",
+            "\033[92mRequest to litellm:\033[0m", log_level="INFO"
         )
         if args and kwargs:
             print_verbose(
-                f"\033[92mlitellm.{original_function.__name__}({args_str}, {kwargs_str})\033[0m"
+                f"\033[92mlitellm.{original_function.__name__}({args_str}, {kwargs_str})\033[0m", log_level="INFO"
             )
         elif args:
             print_verbose(
-                f"\033[92mlitellm.{original_function.__name__}({args_str})\033[0m"
+                f"\033[92mlitellm.{original_function.__name__}({args_str})\033[0m", log_level="INFO"
             )
         elif kwargs:
             print_verbose(
-                f"\033[92mlitellm.{original_function.__name__}({kwargs_str})\033[0m"
+                f"\033[92mlitellm.{original_function.__name__}({kwargs_str})\033[0m", log_level="INFO"
             )
         else:
-            print_verbose(f"\033[92mlitellm.{original_function.__name__}()\033[0m")
+            print_verbose(f"\033[92mlitellm.{original_function.__name__}()\033[0m", log_level="INFO")
         print_verbose("\n")  # new line after
     except Exception:
         # This should always be non blocking
